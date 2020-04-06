@@ -1,52 +1,16 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html>
   <head>
-    <meta charset="utf-8">
-    <title></title>
-    <style>
-
-      .container{
-        width: 80%;
-        height: 600px;
-        margin-left: 10%;
-        background-color: black;
-        overflow: hidden;
-      }
-      .startButton{
-        text-align: center;
-        font-size: 2em;
-        color: white;
-        background-color: darkred;
-      }
-      .myShip{
-        position: absolute;
-        left: 40%;
-        bottom: 20%;
-        background-color: white;
-        width: 100px;
-        height: 20px;
-      }
-      .fireme{
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 25px;
-        height: 25px;
-        border-radius: 50%;
-        background-color: red;
-      }
-      .hide{
-        display:none;
-      }
-    </style>
+    <title>Alien Invaders</title>
+    <link rel="stylesheet" href="style.css" type="text/css">
   </head>
   <body>
-    <div class="topBar">Score: <span class="score">0</span></div>
+    <div class="topBar"> Score: <span class="score">0</span> <span class="message"></span> </div>
     <div class="container">
-      <div class="startButton">Start Game</div>
-      <div class="myShip"></div>
-      <div class="fireme hide"></div>
+        <div class="startButton">Start Game</div>
+        <div class="myShip"></div>
+        <div class="fireme hide"></div>
     </div>
-    <script src="myScript.js"> </script>
+    <script src="alienInvaders.js"> </script>
+    <script src="eventListeners.js"> </script>
   </body>
 </html>

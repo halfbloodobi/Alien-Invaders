@@ -5,48 +5,38 @@
   const scoreOutput = document.querySelector(".score");
 
   const containerDim = container.getBoundingClientRect();
-  btn_start.addEventListener("click", startGame);
-  let player ={
-    score: 0,
-    speed: 5,
-    gameOver: true,
-    fire: false,
-    alienSpeed: 5
-  };
-  let keyV ={};
-  document.addEventListener("keydown",function(e){
-    let key = e.keyCode;
-    if(key===37){
-      keyV.left = true;
-    }
-    else if(key===39){
-      keyV.right = true;
-    }
-    else if(key===38 || key===32){
-      player.fire = true;
-    }
-  })
-  document.addEventListener("keyup",function(e){
-    let key = e.keyCode;
-    if(key===37){
-      keyV.left = false;
-    }
-    else if(key===39){
-      keyV.right = false;
-    }
-  })
 
   function startGame(){
     console.log("start game");
     player.animFrame = requestAnimationFrame(update);
   }
 
+  function addShoot(){
+    player.fire = true;
+    fireme.classList.remove("hide");
+    fireme.xpos = (myShip.offsetLeft + (myShip.offsetWidth / 2));
+    fireme.ypos = myShip.offsetTop - 10;
+    fireme.style.left = fireme.xpos + "px";
+    fireme.style.top = fireme.ypos + "px";
+  }
+
   function update(){
     let tempPos = myShip.offsetLeft;
-    if(keyV.left){
+
+    if(player.fire){
+      if(fireme.ypos > 0){
+      fireme.ypos -= 15;
+      fireme.style.top = fireme.ypos + "px";
+    }else {
+      player.fire = false;
+      fireme.classList.add("hide");
+      fireme.ypos = containerDim.height + 100;
+    }
+  }
+    if(keyV.left && tempPos > containerDim.left){
       tempPos -= player.speed;
     }
-    if(keyV.right){
+    if(keyV.right && tempPos < containerDim.right - myShip.offsetWidth){
       tempPos += player.speed;
     }
     myShip.style.left = tempPos + "px";
