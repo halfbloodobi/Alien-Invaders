@@ -6,6 +6,45 @@
     overflow: hidden;
 }
 
+.alien {
+  position: absolute;
+  display: inline;
+  top: 0;
+  left: 0;
+  width: 80px;
+  height: 50px;
+  color: white;
+  background-color: blue;
+  box-shadow: 0px 1px 8px 0px black;
+  font-size: 1em;
+  text-align: center;
+  border-radius: 4px;
+}
+
+.eye {
+  position: absolute;
+  width: 15px;
+  border-radius: 35%;
+  color: black;
+  height: 15px;
+  background-color: aliceblue;
+}
+
+.eye::after {
+  content: "\2022";
+}
+
+.mouth {
+  position: absolute;
+  width: 50%;
+  height: 5px;
+  bottom: 14px;
+  left: 10%;
+  border-radius: 55%;
+  border: 4px dashed white;
+  background-color: black;
+}
+
 .startButton {
     text-align: center;
     font-size: 2em;
@@ -15,13 +54,22 @@
 
 .myShip {
     position: absolute;
-    left: 40%;
+    left: 45%;
     bottom: 20%;
     background-color: white;
-    width: 100px;
-    height: 20px;
+    width: 80px;
+    height: 40px;
+    border-radius: 8px;
 }
 
+.fireArms {
+  position: absolute;
+  width: 10%;
+  height: 5px;
+  bottom: 14px;
+  border-radius: 8px;
+  background-color: red;
+}
 .fireme {
     position: absolute;
     top: 0;
