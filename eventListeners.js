@@ -5,8 +5,7 @@ let player ={
   gameOver: true,
   fire: false,
   alienSpeed: 5,
-  powerUpSlowEnemies: 0,
-  powerUpLaser: 0
+  powerUpLaser: false
 };
 let keyV ={};
 document.addEventListener("keydown",function(e){
@@ -18,8 +17,13 @@ document.addEventListener("keydown",function(e){
     keyV.right = true;
   }
   else if(key===38 || key===32){
-    if(!player.fire){
-      addShoot();
+    if(player.powerUpLaser){
+      addLaser();
+    }
+    else{
+      if(!player.fire){
+        addShoot();
+      }
     }
   }
 })
@@ -30,5 +34,11 @@ document.addEventListener("keyup",function(e){
   }
   else if(key===39){
     keyV.right = false;
+  }
+  else if(key===38 || key===32){
+    if(player.powerUpLaser){
+     player.fire = false;
+     fireme.classList.add("hide");
+   }
   }
 })

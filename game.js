@@ -11,10 +11,10 @@ let laser = 10;
 function startGame(){
   if(player.gameOver){
     clearAliens();
+    clearPowerUps();
     player.score = 0;
     player.powerUp = 0;
     player.powerUpLaser = 0;
-    player.powerUpSlowEnemies = 0;
     scoreOutput.textContent = player.score;
     player.gameOver = false;
     btn_start.style.display = "none";
@@ -39,16 +39,18 @@ function update(){
       if(isCollide(al,fireme)){
         let rnd = Math.floor(Math.random() * 3);
         if(rnd == 0){
-          console.log("powerUp");
-          AddPowerUp(al.xpos, al.ypos);
+          let rnd2 = Math.floor(Math.random() * 3);
+          AddPowerUp(al.xpos, al.ypos, rnd2);
         }
         player.alienSpeed++;
         player.score += Math.abs(al.directionMove);
         scoreOutput.textContent = player.score;
-        player.fire = false;
-        fireme.classList.add("hide");
         al.parentNode.removeChild(al);
-        fireme.ypos = containerDim.height + 100;
+        if(!player.powerUpLaser){
+          player.fire = false;
+          fireme.classList.add("hide");
+          fireme.ypos = containerDim.height + 100;
+        }
       }
       if(al.xpos > (containerDim.width - al.offsetWidth + 155) || al.xpos < containerDim.left + 10){
         al.directionMove *= -2;
@@ -72,17 +74,16 @@ function update(){
       let pu = tempPowerUps[i];
 
       if(isCollide(pu,myShip)){
-        rnd = Math.floor(Math.random() * 3);
-        if(rnd == 2){
+        if(pu.style.backgroundColor.toString() == "rgb(255, 215, 0)"){
           player.score += 500;
           scoreOutput.textContent = player.score;
         }
         else{
-          if(rnd == 1){
+          if(pu.style.backgroundColor.toString() == "rgb(255, 0, 0)"){
             player.powerUpLaser = 1;
           }
           else{
-            player.powerUpSlowEnemies = 1;
+            player.alienSpeed = 2;
           }
         }
         pu.parentNode.removeChild(pu);
@@ -94,17 +95,9 @@ function update(){
       pu.style.top = pu.ypos + "px";
     }
 
-    if(player.powerUpSlowEnemies == 1){
-      player.alienSpeed = 1;
-    }
-    if(player.powerUpLaser == 1){
-      fireme.style.height = containerDim.height + "px";
-      laser = containerDim.height / 1.5 + 100;
-    }
-
-
     let tempPos = myShip.offsetLeft;
 
+    if(!player.powerUpLaser){
     if(player.fire){
       if(fireme.ypos > 0){
       fireme.ypos -= 15;
@@ -115,6 +108,7 @@ function update(){
       fireme.ypos = containerDim.height + 100;
     }
   }
+  }
     if(keyV.left && tempPos > containerDim.left){
       tempPos -= player.speed;
     }
@@ -122,6 +116,10 @@ function update(){
       tempPos += player.speed;
     }
     myShip.style.left = tempPos + "px";
+    if(player.powerUpLaser){
+      fireme.xpos = (myShip.offsetLeft + (myShip.offsetWidth / 2) - 2);
+      fireme.style.left = fireme.xpos + "px";
+    }
     player.animFrame = requestAnimationFrame(update);
   }
 }
