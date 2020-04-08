@@ -4,7 +4,9 @@ let player ={
   speed: 5,
   gameOver: true,
   fire: false,
-  alienSpeed: 5
+  alienSpeed: 5,
+  powerUpSlowEnemies: 0,
+  powerUpLaser: 0
 };
 let keyV ={};
 document.addEventListener("keydown",function(e){

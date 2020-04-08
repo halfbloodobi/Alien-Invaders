@@ -45,6 +45,19 @@
   background-color: black;
 }
 
+.powerUp {
+  position: absolute;
+  display: inline;
+  top: 0;
+  left: 0;
+  width: 25px;
+  height: 25px;
+  font-size: 1em;
+  text-align: center;
+  background-color: gold;
+  border-radius: 50%;
+}
+
 .startButton {
     text-align: center;
     font-size: 2em;
@@ -62,22 +75,32 @@
     border-radius: 8px;
 }
 
-.fireArms {
-  position: absolute;
-  width: 10%;
-  height: 5px;
-  bottom: 14px;
-  border-radius: 8px;
-  background-color: red;
-}
 .fireme {
     position: absolute;
     top: 0;
     left: 0;
-    width: 25px;
+    width: 5px;
     height: 25px;
-    border-radius: 50%;
+    border-radius: 20%;
     background-color: red;
+}
+
+.topBar {
+  height: 25px;
+  width: 100%;
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.3em;
+}
+
+.bottomBar {
+  height: 25px;
+  width: 100%;
+  color: black;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.3em;
 }
 
 .hide {

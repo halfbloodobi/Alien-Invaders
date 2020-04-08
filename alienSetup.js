@@ -6,7 +6,7 @@ function setupAliens(num){
     y: 50
   }
   for(let i=0; i < num; i++){
-    if(row.x > (lastCol - tempWidth)){
+    if(row.x > (lastCol - tempWidth + 80)){
       row.y += 70;
       row.x = containerDim.left + 20;
     }
@@ -16,6 +16,9 @@ function setupAliens(num){
 }
 
 function alienMaker(row, tempWidth){
+  if(row.y > containerDim.height - 200){
+    return;
+  }
   let div = document.createElement("div");
   div.classList.add("alien");
   eyeMaker(div, "left");
@@ -28,7 +31,7 @@ function alienMaker(row, tempWidth){
   div.ypos = Math.floor(row.y);
   div.style.left = div.xpos + "px";
   div.style.top = div.ypos + "px";
-  div.directionMove = 1;
+  div.directionMove = 100;
   container.appendChild(div);
 }
 
