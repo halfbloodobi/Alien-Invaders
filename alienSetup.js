@@ -2,20 +2,32 @@ function setupAliens(num){
   let tempWidth = 90;
   let lastCol = containerDim.width - tempWidth;
   let row ={
-    x: containerDim.left + 20,
+    x: containerDim.left + 30,
     y: 50
   }
+  let directionMove = 100;
   for(let i=0; i < num; i++){
-    if(row.x > (lastCol - tempWidth + 80)){
+    if(row.x > (containerDim.width - tempWidth) || row.x < (containerDim.left + 30)){
       row.y += 70;
-      row.x = containerDim.left + 20;
+      if(directionMove > 0){
+        row.x = containerDim.width - tempWidth;
+      }
+      else{
+        row.x = containerDim.left + 30;
+      }
+      directionMove *= -2;
     }
-    alienMaker(row, tempWidth);
-    row.x += tempWidth + 20;
+    alienMaker(row, tempWidth, directionMove);
+    if(directionMove > 0){
+      row.x += tempWidth + 20;
+    }
+    else{
+      row.x -= (tempWidth + 20);
+    }
   }
 }
 
-function alienMaker(row, tempWidth){
+function alienMaker(row, tempWidth, directionMove){
   if(row.y > containerDim.height - 200){
     return;
   }
@@ -31,7 +43,7 @@ function alienMaker(row, tempWidth){
   div.ypos = Math.floor(row.y);
   div.style.left = div.xpos + "px";
   div.style.top = div.ypos + "px";
-  div.directionMove = 100;
+  div.directionMove = directionMove;
   container.appendChild(div);
 }
 

@@ -17,8 +17,11 @@ document.addEventListener("keydown",function(e){
     keyV.right = true;
   }
   else if(key===38 || key===32){
+    if(!player.gameOver){
     if(player.powerUpLaser){
       addLaser();
+      player.score -= 10;
+      scoreOutput.textContent = player.score;
     }
     else{
       if(!player.fire){
@@ -26,6 +29,7 @@ document.addEventListener("keydown",function(e){
       }
     }
   }
+}
 })
 document.addEventListener("keyup",function(e){
   let key = e.keyCode;

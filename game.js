@@ -5,23 +5,24 @@ const fireme = document.querySelector(".fireme");
 const scoreOutput = document.querySelector(".score");
 const highscoreOutput = document.querySelector(".highscore");
 const bottom = document.querySelector(".bottomBar");
+const newHighscore = document.querySelector(".newHigh");
 const containerDim = container.getBoundingClientRect();
-let laser = 10;
+let enemies = 20;
 
 function startGame(){
   if(player.gameOver){
     clearAliens();
     clearPowerUps();
-    player.score = 0;
     player.powerUp = 0;
     player.powerUpLaser = 0;
     scoreOutput.textContent = player.score;
     player.gameOver = false;
     btn_start.style.display = "none";
-    player.alienSpeed = 10;
+    player.alienSpeed = 8;
     player.fire = false;
     fireme.classList.add("hide");
-    setupAliens(20);
+    newHighscore.classList.add("hide");
+    setupAliens(enemies);
     player.animFrame = requestAnimationFrame(update);
   }
 }
@@ -31,15 +32,31 @@ function update(){
     let tempAliens = document.querySelectorAll(".alien");
     let tempPowerUps = document.querySelectorAll(".powerUp");
     if(tempAliens.length == 0){
+      if(enemies == 60){
       gameOver();
+      enemies = 20;
+      player.score = 0;
       btn_start.innerHTML = "You Won! Click here to play again";
+    }
+    else{
+      if(enemies == 40){
+      enemies += 20;
+      gameOver();
+      btn_start.innerHTML = "You Won! Click here to play the final level";
+    }
+    else{
+      enemies += 20;
+      gameOver();
+      btn_start.innerHTML = "You Won! Click here to play the next level";
+    }
+    }
     }
     for(let i = tempAliens.length - 1; i >= 0; i--){
       let al = tempAliens[i];
       if(isCollide(al,fireme)){
         let rnd = Math.floor(Math.random() * 3);
         if(rnd == 0){
-          let rnd2 = Math.floor(Math.random() * 3);
+          let rnd2 = Math.floor(Math.random() * 6);
           AddPowerUp(al.xpos, al.ypos, rnd2);
         }
         player.alienSpeed++;
@@ -52,11 +69,18 @@ function update(){
           fireme.ypos = containerDim.height + 100;
         }
       }
-      if(al.xpos > (containerDim.width - al.offsetWidth + 155) || al.xpos < containerDim.left + 10){
+      if(al.xpos > (containerDim.width - al.offsetWidth + 125) || al.xpos < containerDim.left + 20){
         al.directionMove *= -2;
-        al.ypos += 40;
+        if(al.directionMove < 0){
+          al.xpos += -10;
+        }
+        else{
+          al.xpos += 10;
+        }
+        al.ypos += 70;
         if(al.ypos > myShip.offsetTop - 40){
           gameOver();
+          enemies = 20;
           btn_start.innerHTML = "You lost! Click here to play again";
         }
       }
@@ -75,12 +99,16 @@ function update(){
 
       if(isCollide(pu,myShip)){
         if(pu.style.backgroundColor.toString() == "rgb(255, 215, 0)"){
-          player.score += 500;
+          player.score = Math.floor(player.score * 1.1);
           scoreOutput.textContent = player.score;
         }
         else{
           if(pu.style.backgroundColor.toString() == "rgb(255, 0, 0)"){
             player.powerUpLaser = 1;
+            if(player.fire){
+              player.fire = false;
+              fireme.classList.add("hide");
+            }
           }
           else{
             player.alienSpeed = 2;
@@ -90,6 +118,8 @@ function update(){
       }
       if(isCollide(pu,bottom)){
         pu.parentNode.removeChild(pu);
+        player.score -= 100;
+        scoreOutput.textContent = player.score;
       }
       pu.ypos += 10;
       pu.style.top = pu.ypos + "px";
@@ -106,6 +136,8 @@ function update(){
       player.fire = false;
       fireme.classList.add("hide");
       fireme.ypos = containerDim.height + 100;
+      player.score -= 100;
+      scoreOutput.textContent = player.score;
     }
   }
   }

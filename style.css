@@ -1,6 +1,6 @@
 .container {
     width: 80%;
-    height: 80%;
+    height: 90%;
     margin-left: 10%;
     background-color: black;
     overflow: hidden;
@@ -68,7 +68,7 @@
 .myShip {
     position: absolute;
     left: 45%;
-    bottom: 20%;
+    bottom: 10.5%;
     background-color: white;
     width: 80px;
     height: 40px;
@@ -95,6 +95,15 @@
 }
 
 .bottomBar {
+  height: 25px;
+  width: 100%;
+  color: black;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.3em;
+}
+
+.newHigh {
   height: 25px;
   width: 100%;
   color: black;

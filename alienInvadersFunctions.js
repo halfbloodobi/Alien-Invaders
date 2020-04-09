@@ -40,6 +40,7 @@ function gameOver(){
   btn_start.style.display = "block";
   if(player.score > parseInt(highscoreOutput.textContent)){
   highscoreOutput.textContent = player.score;
+  newHighscore.classList.remove("hide");
 }
 }
 
@@ -51,15 +52,15 @@ function AddPowerUp(x, y, rnd){
   div.ypos = y;
   div.style.left = div.xpos + "px";
   div.style.top = div.ypos + "px";
-  if(rnd == 1){
-    div.style.backgroundColor = "#ff0000";
+  if(rnd <= 2){
+    div.style.backgroundColor = "#ffd700";
   }
   else{
-     if(rnd == 2){
+     if(rnd <= 4){
        div.style.backgroundColor = "#87bbff";
      }
      else{
-       div.style.backgroundColor = "#ffd700";
+       div.style.backgroundColor = "#ff0000";
      }
   }
   container.appendChild(div);
