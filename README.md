@@ -16,7 +16,7 @@ Alien Invaders is a game made in Javascript. The player controls the white block
 The game has:
 - 3 power-ups
 - 3 levels
-- keeping track of highscore
+- highscore tracking
 
 ## How to play
 
