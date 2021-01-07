@@ -6,9 +6,7 @@ Alien Invaders is a game made in Javascript. The player controls the white block
 
 <br />
 <p align="center">
-  <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="images/Screenshot.png" alt="Screenshot" width="100%" height="100%">
-  </a>
+  <img src="images/Screenshot.png" alt="Screenshot" width="100%" height="100%">
 </p>
 
 ## Features
